@@ -1,0 +1,15 @@
+.container.mb-2
+  .d-flex.flex-wrap.align-items-center.py-2.border-bottom
+    .navbar.navbar-expand-md.navbar-light.me-auto
+      a.navbar-brand.me-md-4 href="/"
+        img width="30" src="/assets/logo-949bedda5fac9b2f03fffb015caa449ee988a7ddbcbcddef1c7bdbdd7393f9e0.png"
+      button.navbar-toggler type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
+        span.navbar-toggler-icon
+      #navbarToggler.collapse.navbar-collapse
+        ul.nav.nav-pills.flex-grow-1.navbar-nav.me-auto
+          li.nav-item.me-2
+            a.nav-link.text-dark href="/" Главная
+    ul.nav.nav-pills
+      li.nav-item.me-2
+        form.button_to method="post" action="/auth/github"
+          button.nav-link.link-dark href="/" Войти с помощью Github
