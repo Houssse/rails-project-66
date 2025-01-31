@@ -1,0 +1,7 @@
+linters:
+  LineLength:
+    max: 120
+  TrailingWhitespace:
+    enabled: true
+  EmptyLines:
+    max: 1
