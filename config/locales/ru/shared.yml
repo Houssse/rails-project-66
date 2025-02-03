@@ -1,0 +1,8 @@
+ru:
+  shared:
+    nav:
+      home: 'Главная'
+      login: 'Войти с помощью Github'
+      logout: 'Выйти'
+    footer:
+      text: '© Hexlet Ltd, 2025'

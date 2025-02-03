@@ -10,6 +10,9 @@ Bundler.require(*Rails.groups)
 
 module RailsProject66
   class Application < Rails::Application
+    config.i18n.default_locale = :ru
+    config.time_zone = 'Moscow'
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults(7.2)
 

@@ -1,20 +1,21 @@
 .container.mb-2
   .d-flex.flex-wrap.align-items-center.py-2.border-bottom
     .navbar.navbar-expand-md.navbar-light.me-auto
-      a.navbar-brand.me-md-4 href="/"
-        img width="30" src="/assets/logo-949bedda5fac9b2f03fffb015caa449ee988a7ddbcbcddef1c7bdbdd7393f9e0.png"
+      = link_to root_path, class: 'navbar-brand me-md-4' do
+        = image_tag asset_path('logo.jpg'), width: 30
       button.navbar-toggler type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
         span.navbar-toggler-icon
       #navbarToggler.collapse.navbar-collapse
         ul.nav.nav-pills.flex-grow-1.navbar-nav.me-auto
           li.nav-item.me-2
-            a.nav-link.text-dark href="/" Главная
+            = link_to t('.home'), root_path, class: 'nav-link text-dark'
     ul.nav.nav-pills
-    - if session[:user_id]
-      li.nav-item.me-2
-        = link_to t('.logout'), logout_path, data: { turbo_method: :delete }, class: 'nav-link text-dark'
-    - else
-        = button_to auth_request_path(:github), method: :post, class: 'nav-link text-dark',
-          data: { turbo: 'false' } do
-            span.bi.bi-github.me-2
-            = t('.login')
+      - if session[:user_id]
+        li.nav-item.me-2
+          = link_to t('.logout'), logout_path, data: { turbo_method: :delete }, class: 'nav-link text-dark'
+      - else
+        li.nav-item.me-2
+          = button_to auth_request_path(:github), method: :post, class: 'nav-link text-dark',
+            data: { turbo: 'false' } do
+              span.bi.bi-github.me-2
+              = t('.login')
