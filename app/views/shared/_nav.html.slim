@@ -9,6 +9,9 @@
         ul.nav.nav-pills.flex-grow-1.navbar-nav.me-auto
           li.nav-item.me-2
             = link_to t('.home'), root_path, class: 'nav-link text-dark'
+          - if session[:user_id]
+            li.nav-item.me-2
+              = link_to t('.index_repositories'), repositories_path, class: 'nav-link text-dark'
     ul.nav.nav-pills
       - if session[:user_id]
         = link_to '#', class: 'nav-link text-secondary' do
