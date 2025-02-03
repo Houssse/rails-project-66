@@ -108,6 +108,8 @@ GEM
       railties (>= 6.1)
     drb (2.2.1)
     erubi (1.13.1)
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
     faraday (2.12.2)
       faraday-net_http (>= 2.0, < 3.5)
       json
@@ -407,6 +409,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   dotenv-rails
+  faker
   faraday-retry
   jbuilder
   jsbundling-rails

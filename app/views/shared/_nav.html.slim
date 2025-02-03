@@ -11,6 +11,8 @@
             = link_to t('.home'), root_path, class: 'nav-link text-dark'
     ul.nav.nav-pills
       - if session[:user_id]
+        = link_to '#', class: 'nav-link text-secondary' do
+          = current_user.email
         li.nav-item.me-2
           = link_to t('.logout'), logout_path, data: { turbo_method: :delete }, class: 'nav-link text-dark'
       - else
