@@ -15,10 +15,7 @@ html
     link rel="apple-touch-icon" href="/icon.png"
     = stylesheet_link_tag 'application', 'data-turbo-track': 'reload'
     = javascript_include_tag 'application', 'data-turbo-track': 'reload', type: 'module'
-    - # rubocop:disable Rails/OutputSafety
-    = Sentry.get_trace_propagation_meta.html_safe
-    - # rubocop:enable Rails/OutputSafety
-
+    = sanitize(Sentry.get_trace_propagation_meta)
   body.d-flex.flex-column.h-100
     = render 'shared/nav'
 

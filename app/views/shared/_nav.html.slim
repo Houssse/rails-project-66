@@ -10,6 +10,11 @@
           li.nav-item.me-2
             a.nav-link.text-dark href="/" Главная
     ul.nav.nav-pills
+    - if session[:user_id]
       li.nav-item.me-2
-        form.button_to method="post" action="/auth/github"
-          button.nav-link.link-dark href="/" Войти с помощью Github
+        = link_to t('.logout'), logout_path, data: { turbo_method: :delete }, class: 'nav-link text-dark'
+    - else
+        = button_to auth_request_path(:github), method: :post, class: 'nav-link text-dark',
+          data: { turbo: 'false' } do
+            span.bi.bi-github.me-2
+            = t('.login')

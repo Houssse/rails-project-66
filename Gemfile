@@ -38,6 +38,10 @@ gem 'bootsnap', require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+gem 'faraday-retry'
+gem 'octokit'
+gem 'omniauth-github'
+gem 'omniauth-rails_csrf_protection'
 gem 'pg'
 gem 'sentry-rails'
 gem 'sentry-ruby'
