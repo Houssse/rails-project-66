@@ -152,6 +152,11 @@ GEM
     matrix (0.4.2)
     mini_mime (1.1.5)
     minitest (5.25.4)
+    minitest-power_assert (0.3.1)
+      minitest
+      power_assert (>= 1.1)
+    mocha (2.7.1)
+      ruby2_keywords (>= 0.0.5)
     msgpack (1.7.5)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
@@ -211,6 +216,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
+    power_assert (2.0.5)
     pp (0.6.2)
       prettyprint
     prettyprint (0.2.0)
@@ -306,6 +312,7 @@ GEM
       rubocop (~> 1.45)
       slimi (~> 0.7)
     ruby-progressbar (1.13.0)
+    ruby2_keywords (0.0.5)
     rubyzip (2.4.1)
     sawyer (0.9.2)
       addressable (>= 2.3.5)
@@ -416,6 +423,8 @@ DEPENDENCIES
   faraday-retry
   jbuilder
   jsbundling-rails
+  minitest-power_assert
+  mocha
   octokit
   omniauth-github
   omniauth-rails_csrf_protection

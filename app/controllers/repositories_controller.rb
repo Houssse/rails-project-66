@@ -16,10 +16,6 @@ class RepositoriesController < ApplicationController
   def create
     client = Octokit::Client.new(access_token: current_user.token)
     github_repo = client.repo(params[:repository][:github_id].to_i)
-    if github_repo[:language].to_s.downcase != 'ruby'
-      redirect_to new_repository_path
-      return
-    end
 
     repository = current_user.repositories.new(
       name: github_repo[:name],
