@@ -1,2 +1,5 @@
-h1 Repositories#new
-p Find me in app/views/repositories/new.html.slim
+= simple_form_for @repository, method: :post do |f|
+  = f.input :github_id, collection: @repos.map { |repo| [repo.full_name, repo.id] },
+   required: true, input_html: { class: 'form-control select required' }
+
+  = f.button :submit, t('repositories.new.create_repository'), class: 'btn btn-success mt-3'

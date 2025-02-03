@@ -1,1 +1,9 @@
 ru:
+  repositories:
+    index:
+      new_repository: "Добавить"
+      name: "Название"
+      language: "Язык"
+      check_status: "Статус последней проверки"
+    new:
+      create_repository: "Создать Repository"

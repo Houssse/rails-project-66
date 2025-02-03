@@ -2,6 +2,7 @@ ru:
   shared:
     nav:
       home: 'Главная'
+      index_repositories: 'Репозитории'
       login: 'Войти с помощью Github'
       logout: 'Выйти'
     footer:
