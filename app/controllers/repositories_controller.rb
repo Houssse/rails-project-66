@@ -7,6 +7,10 @@ class RepositoriesController < ApplicationController
     @repositories = current_user.repositories
   end
 
+  def show
+    @repository = current_user.repositories.find(params[:id])
+  end
+
   def new
     client = ApplicationContainer[:github_client].new(access_token: current_user.token, auto_paginate: true)
     @repos = client.repos

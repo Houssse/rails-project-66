@@ -1,0 +1,31 @@
+.mb-4
+  h1 = @repository.full_name
+
+= link_to 'Проверить', '/repositories/3/checks', class: 'btn btn-primary mb-4', method: :post, rel: 'nofollow'
+
+p
+  strong.me-2 Название
+  = @repository.full_name
+
+p
+  strong.me-2 Язык
+  = @repository.language
+
+p
+  strong.me-2 Дата создания
+  = @repository.created_at.strftime('%d %b %Y, %H:%M')
+
+p
+  strong.me-2 Дата обновления
+  = @repository.updated_at.strftime('%d %b %Y, %H:%M')
+
+hr
+
+table.table.table-striped
+  thead
+    tr
+      th[scope="col"]
+      th[scope="col"] Статус
+      th[scope="col"] ID коммита
+      th[scope="col"] Проверка пройдена?
+      th[scope="col"] Дата создания
