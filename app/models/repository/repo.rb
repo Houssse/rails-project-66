@@ -7,7 +7,8 @@ module Repository
     extend Enumerize
 
     belongs_to :user
-    has_many :checks, class_name: 'Repository::Check', dependent: :destroy
+    has_many :checks, class_name: 'Repository::Check', foreign_key: 'repository_id', dependent: :destroy,
+                      inverse_of: :repository
 
     enumerize :language, in: %w[ruby], predicates: true
 

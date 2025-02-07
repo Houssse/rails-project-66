@@ -9,6 +9,7 @@ class RepositoriesController < ApplicationController
 
   def show
     @repository = current_user.repositories.find(params[:id])
+    @checks = @repository.checks
   end
 
   def new
