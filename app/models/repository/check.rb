@@ -7,16 +7,36 @@ module Repository
     include AASM
 
     aasm column: 'state' do
-      state :checking, initial: true
+      state :pending, initial: true
+      state :cloning
+      state :checking
       state :completed
+      state :failed
+
+      event :start_cloning do
+        transitions from: :pending, to: :cloning
+      end
+
+      event :start_checking do
+        transitions from: :cloning, to: :checking
+      end
 
       event :complete do
-        transitions from: :checking, to: :completed
+        transitions from: %i[checking cloning], to: :completed
+      end
+
+      event :fail do
+        transitions from: %i[cloning checking], to: :failed
       end
 
       event :restart do
-        transitions from: :completed, to: :checking
+        transitions from: %i[completed failed], to: :pending
       end
+    end
+
+    def run_check!
+      start_cloning!
+      Repository::CheckJob.perform_later(id)
     end
   end
 end

@@ -41,3 +41,5 @@
 
 /db/*.sqlite3
 /db/*.sqlite3-*
+
+/dump.rdb

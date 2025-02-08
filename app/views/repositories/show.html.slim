@@ -1,7 +1,8 @@
 .mb-4
   h1 = @repository.full_name
 
-= link_to 'Проверить', '/repositories/3/checks', class: 'btn btn-primary mb-4', method: :post, rel: 'nofollow'
+= button_to 'Запустить проверку', repository_checks_path(@repository, commit_id: 'main'),
+  method: :post, class: 'btn btn-primary'
 
 p
   strong.me-2 Название
@@ -34,6 +35,9 @@ table.table.table-striped
       tr
         td = check.id
         td = check.state
-        td = check.commit_id
+        td
+          - commit_url = "https://github.com/#{check.repository.full_name}/commit/#{check.commit_id}"
+          a href=commit_url target="_blank" rel="noopener"
+            = check.commit_id&.first(7)
         td = check.passed
         td = check.created_at.strftime('%d %b %Y, %H:%M')
