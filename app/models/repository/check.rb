@@ -3,6 +3,7 @@
 module Repository
   class Check < ApplicationRecord
     belongs_to :repository, class_name: 'Repository::Repo', inverse_of: :checks
+    has_many :offenses, class_name: 'Repository::CheckOffense', dependent: :destroy
 
     include AASM
 

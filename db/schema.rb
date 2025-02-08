@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_07_221922) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_08_230905) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,6 +25,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_07_221922) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_repositories_on_user_id"
+  end
+
+  create_table "repository_check_offenses", force: :cascade do |t|
+    t.bigint "check_id", null: false
+    t.string "file_path"
+    t.text "message"
+    t.string "rule_id"
+    t.integer "line"
+    t.integer "column"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["check_id"], name: "index_repository_check_offenses_on_check_id"
   end
 
   create_table "repository_checks", force: :cascade do |t|
@@ -48,5 +60,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_07_221922) do
   end
 
   add_foreign_key "repositories", "users"
+  add_foreign_key "repository_check_offenses", "repository_checks", column: "check_id"
   add_foreign_key "repository_checks", "repositories"
 end
