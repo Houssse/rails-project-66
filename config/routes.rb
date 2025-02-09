@@ -1,13 +1,8 @@
 # frozen_string_literal: true
 
-require 'sidekiq/web'
-
 Rails.application.routes.draw do
   # test sentry
   get 'sentry_test', to: 'application#test_sentry'
-
-  # sidekiq
-  mount Sidekiq::Web => '/sidekiq'
 
   # omniauth
   post 'auth/:provider', to: 'auth#request', as: :auth_request

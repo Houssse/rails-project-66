@@ -13,7 +13,7 @@ module RailsProject66
     config.i18n.default_locale = :ru
     config.time_zone = 'Moscow'
 
-    config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_adapter = :async
 
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults(7.2)
