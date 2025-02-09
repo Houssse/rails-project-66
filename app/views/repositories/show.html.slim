@@ -33,7 +33,7 @@ table.table.table-striped
   tbody
     - @repository.checks.each do |check|
       tr
-        td = check.id
+        td = link_to check.id, repository_check_path(@repository, check)
         td = check.state
         td
           - commit_url = "https://github.com/#{check.repository.full_name}/commit/#{check.commit_id}"

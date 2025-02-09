@@ -1,0 +1,38 @@
+  = link_to "Перейти к репозиторию", repository_path(@check.repository), class: "btn btn-primary mb-4"
+  h1 Проверка ##{@check.id}
+  table class="table"
+    tbody
+      tr
+        td Дата создания
+        td = @check.created_at
+      tr
+        td Статус
+        td = @check.state
+      tr
+        td Проверка пройдена
+        td = @check.passed
+      tr
+        td Количество замечаний
+        td = @check.offenses.count
+      tr
+        td ID коммита
+        td
+          = link_to @check.commit_id&.first(7), "https://github.com/#{@check.repository.full_name}/commit/#{@check.commit_id}",
+           target: "_blank", rel: "noopener"
+
+  table class="table table-hover mb-5"
+    thead
+      tr
+        th Сообщение
+        th Идентификатор правила
+        th Строка и символ
+    tbody
+      - @check.offenses.group_by(&:file_path).each do |file_path, offenses|
+        tr
+          td colspan="3"
+            = link_to file_path.sub(/^.*repos\/#{@check.repository.full_name}\//, ''), "https://github.com/#{@check.repository.full_name}/tree/#{@check.commit_id.first(7)}/#{file_path.sub(/^.*repos\/#{@check.repository.full_name}\//, '')}", target: "_blank", rel: "noopener"
+        - offenses.each do |offense|
+          tr
+            td = offense.message
+            td = offense.rule_id
+            td = "#{offense.line}:#{offense.column}"

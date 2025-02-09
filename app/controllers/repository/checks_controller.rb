@@ -4,6 +4,10 @@ module Repository
   class ChecksController < ApplicationController
     before_action :set_repository
 
+    def show
+      @check = @repository.checks.find(params[:id])
+    end
+
     def create
       check = @repository.checks.create!(state: 'pending')
       Repository::CheckRepositoryJob.perform_later(check.id)
