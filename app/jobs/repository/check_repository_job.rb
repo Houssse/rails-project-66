@@ -50,7 +50,7 @@ module Repository
 
     def run_rubocop(check, repo_dir)
       rubocop_config = Rails.root.join('.rubocop.yml')
-      stdout, stderr, status = Open3.capture3("rubocop --config #{rubocop_config} --format json #{repo_dir}")
+      stdout, _, status = Open3.capture3("rubocop --config #{rubocop_config} --format json #{repo_dir}")
 
       if status.success?
         check.update!(passed: true)

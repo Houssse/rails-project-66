@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateRepositoryCheckOffenses < ActiveRecord::Migration[7.2]
   def change
     create_table :repository_check_offenses do |t|
