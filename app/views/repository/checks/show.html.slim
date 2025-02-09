@@ -1,23 +1,23 @@
-= link_to 'Перейти к репозиторию', repository_path(@check.repository), class: 'btn btn-primary mb-4'
+= link_to t('.button.back'), repository_path(@check.repository), class: 'btn btn-primary mb-4'
 
-h1 Проверка ##{@check.id}
+h1 = t('.check', check_id: @check.id)
 
 table class="table"
   tbody
     tr
-      td Дата создания
+      td = t('.created_at')
       td = @check.created_at
     tr
-      td Статус
+      td = t('.state')
       td = @check.state
     tr
-      td Проверка пройдена
+      td = t('.passed')
       td = @check.passed
     tr
-      td Количество замечаний
+      td = t('.offenses_count')
       td = @check.offenses.count
     tr
-      td ID коммита
+      td = t('.commit_id')
       td
         = link_to @check.commit_id&.first(7),
           "https://github.com/#{@check.repository.full_name}/commit/#{@check.commit_id}",
@@ -26,9 +26,9 @@ table class="table"
 table class="table table-hover mb-5"
   thead
     tr
-      th Сообщение
-      th Идентификатор правила
-      th Строка и символ
+      th = t('.message')
+      th = t('.rule_id')
+      th = t('.line_column')
   tbody
     - @check.offenses.group_by(&:file_path).each do |file_path, offenses|
       tr
