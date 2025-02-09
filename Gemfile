@@ -54,6 +54,17 @@ gem 'simple_form'
 gem 'slim-rails'
 gem 'stackprof'
 
+# Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
+gem 'rubocop', require: false
+gem 'rubocop-capybara', require: false
+gem 'rubocop-minitest', require: false
+gem 'rubocop-performance', require: false
+gem 'rubocop-rails', require: false
+gem 'rubocop-rails-omakase', require: false
+gem 'rubocop-rake', require: false
+gem 'rubocop-slim', require: false
+gem 'slim_lint', require: false
+
 group :development, :test do
   gem 'webmock'
 
@@ -63,17 +74,7 @@ group :development, :test do
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem 'brakeman', require: false
 
-  # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem 'dotenv-rails'
-  gem 'rubocop', require: false
-  gem 'rubocop-capybara', require: false
-  gem 'rubocop-minitest', require: false
-  gem 'rubocop-performance', require: false
-  gem 'rubocop-rails', require: false
-  gem 'rubocop-rails-omakase', require: false
-  gem 'rubocop-rake', require: false
-  gem 'rubocop-slim', require: false
-  gem 'slim_lint', require: false
 end
 
 group :development do
