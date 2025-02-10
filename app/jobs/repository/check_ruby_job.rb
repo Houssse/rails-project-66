@@ -30,7 +30,7 @@ module Repository
     private
 
     def run_rubocop(check, repo_dir)
-      rubocop_config = Rails.root.join('storage/repositories/.rubocop.yml')
+      rubocop_config = Rails.root.join('lib/linters/.rubocop.yml')
       stdout, _, status = Open3.capture3("rubocop --config #{rubocop_config} --format json #{repo_dir}")
 
       if status.success?

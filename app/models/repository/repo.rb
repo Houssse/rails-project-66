@@ -10,7 +10,7 @@ module Repository
     has_many :checks, class_name: 'Repository::Check', foreign_key: 'repository_id', dependent: :destroy,
                       inverse_of: :repository
 
-    enumerize :language, in: %w[ruby], predicates: true
+    enumerize :language, in: %w[ruby javascript], predicates: true
 
     validates :name, :github_id, :full_name, :language, :clone_url, :ssh_url, presence: true
     validates :github_id, uniqueness: true

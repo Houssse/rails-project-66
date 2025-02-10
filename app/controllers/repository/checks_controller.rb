@@ -10,7 +10,14 @@ module Repository
 
     def create
       check = @repository.checks.create!(state: 'pending')
-      Repository::CheckRubyJob.perform_later(check.id)
+
+      case @repository.language
+      when 'javascript'
+        Repository::CheckJavascriptJob.perform_later(check.id)
+      when 'ruby'
+        Repository::CheckRubyJob.perform_later(check.id)
+      end
+
       redirect_to repository_path(@repository)
     end
 
