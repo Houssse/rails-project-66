@@ -10,7 +10,7 @@ module Repository
 
     def create
       check = @repository.checks.create!(state: 'pending')
-      Repository::CheckRepositoryJob.perform_later(check.id)
+      Repository::CheckRubyJob.perform_later(check.id)
       redirect_to repository_path(@repository)
     end
 

@@ -33,9 +33,9 @@ table class="table table-hover mb-5"
     - @check.offenses.group_by(&:file_path).each do |file_path, offenses|
       tr
         td colspan="3"
-          = link_to file_path.sub(%r{^.*repos/#{@check.repository.full_name}/}, ''),
+          = link_to file_path.sub(%r{^.*repositories/#{@check.repository.full_name}/}, ''),
             "https://github.com/#{@check.repository.full_name}/tree/#{@check.commit_id.first(7)}/" \
-            "#{file_path.sub(%r{^.*repos/#{@check.repository.full_name}/}, '')}",
+            "#{file_path.sub(%r{^.*repositories/#{@check.repository.full_name}/}, '')}",
             target: '_blank', rel: 'noopener'
       - offenses.each do |offense|
         tr

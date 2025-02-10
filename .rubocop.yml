@@ -16,6 +16,7 @@ AllCops:
     - 'lib/templates/slim/scaffold/_form.html.slim'
     - 'script/**/*'
     - 'tmp/**/*'
+    - 'storage/**/*'
 
 Metrics/BlockLength:
   Exclude:
