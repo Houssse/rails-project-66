@@ -16,7 +16,7 @@ module RailsProject66
     config.active_job.queue_adapter = :async
 
     config.after_initialize do
-      Rails.application.routes.default_url_options = { host: ENV['BASE_URL'] }
+      Rails.application.routes.default_url_options = { host: ENV.fetch('BASE_URL', nil) }
     end
 
     # Initialize configuration defaults for originally generated Rails version.

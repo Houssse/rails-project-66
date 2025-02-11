@@ -15,23 +15,23 @@ module Repository
 
     validates :name, :github_id, :full_name, :language, :clone_url, :ssh_url, presence: true
     validates :github_id, uniqueness: true
-    
+
     private
 
     def setup_webhook
-      return unless user.token.present?
-  
+      return if user.token.blank?
+
       client = Octokit::Client.new(access_token: user.token)
-  
-      webhook_url = Rails.application.routes.url_helpers.api_checks_url(host: ENV['BASE_URL'])
-  
+
+      webhook_url = Rails.application.routes.url_helpers.api_checks_url(host: ENV.fetch('BASE_URL', nil))
+
       client.create_hook(
         full_name,
         'web',
         {
           url: webhook_url,
           content_type: 'json',
-          secret: ENV['GITHUB_WEBHOOK_SECRET']
+          secret: ENV.fetch('GITHUB_WEBHOOK_SECRET', nil)
         },
         {
           events: ['push'],
