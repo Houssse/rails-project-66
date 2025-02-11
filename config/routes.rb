@@ -13,5 +13,9 @@ Rails.application.routes.draw do
     resources :checks, only: %i[show create], module: :repository
   end
 
+  namespace :api do
+    resources :checks, only: [:create]
+  end
+
   root 'home#index'
 end
