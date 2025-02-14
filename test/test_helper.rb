@@ -18,7 +18,7 @@ module ActiveSupport
 
     # Add more helper methods to be used by all tests here...
 
-     Rails.application.routes.default_url_options[:host] = 'example.com'
+    Rails.application.routes.default_url_options[:host] = 'example.com'
   end
 end
 
