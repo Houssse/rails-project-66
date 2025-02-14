@@ -6,7 +6,7 @@ table class="table"
   tbody
     tr
       td = t('.created_at')
-      td = @check.created_at
+      td = I18n.l(@check.created_at, format: :default)
     tr
       td = t('.state')
       td = @check.state

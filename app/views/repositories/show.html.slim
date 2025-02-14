@@ -14,11 +14,11 @@ p
 
 p
   strong.me-2 = t('.created_at')
-  = @repository.created_at.strftime('%d %b %Y, %H:%M')
+  = I18n.l(@repository.created_at, format: :default)
 
 p
   strong.me-2 = t('.updated_at')
-  = @repository.updated_at.strftime('%d %b %Y, %H:%M')
+  = I18n.l(@repository.updated_at, format: :default)
 
 hr
 
@@ -40,4 +40,4 @@ table.table.table-striped
           a href=commit_url target="_blank" rel="noopener"
             = check.commit_id&.first(7)
         td = check.passed
-        td = check.created_at.strftime('%d %b %Y, %H:%M')
+        td = I18n.l(check.created_at, format: :short)
