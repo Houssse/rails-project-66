@@ -1,0 +1,19 @@
+h1 Отчёт о проверке репозитория #{@repository.full_name}
+
+p Состояние проверки: #{@check.state}
+p Результат: #{@check.passed ? 'Успешно' : 'С ошибками'}
+
+- if @check.offenses.any?
+  h2 Нарушения:
+  ul
+    - @check.offenses.each do |offense|
+      li
+        | Файл: #{offense.file_path}
+        br
+        | Сообщение: #{offense.message}
+        br
+        | Правило: #{offense.rule_id}
+        br
+        | Строка: #{offense.line}, Колонка: #{offense.column}
+- else
+  p Нарушений не обнаружено.

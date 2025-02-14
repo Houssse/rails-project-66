@@ -22,6 +22,8 @@ module Repository
       run_rubocop(check, repo_dir)
 
       check.complete!
+
+      RepositoryMailer.check_report(check.repository.user, check).deliver_later if !check.passed || check.offenses.any?
     rescue StandardError => e
       check.fail!
       Rails.logger.error("Repository check failed: #{e.message}")
