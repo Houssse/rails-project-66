@@ -32,35 +32,36 @@ ru:
       - окт
       - ноя
       - дек
-  repository:
-    checks:
+  web:
+    repository:
+      checks:
+        show:
+          check: "Проверка #%{check_id}"
+          created_at: "Дата создания"
+          state: "Статус"
+          passed: "Проверка пройдена"
+          offenses_count: "Количество замечаний"
+          commit_id: "ID коммита"
+          message: "Сообщение"
+          rule_id: "Идентификатор правила"
+          line_column: "Строка и символ"
+          button:
+            back: "Перейти к репозиторию"
+    repositories:
+      index:
+        new_repository: "Добавить"
+        name: "Название"
+        language: "Язык"
+        check_status: "Статус последней проверки"
       show:
-        check: "Проверка #%{check_id}"
+        full_name: "Название"
+        language: "Язык"
         created_at: "Дата создания"
+        updated_at: "Дата обновления"
         state: "Статус"
-        passed: "Проверка пройдена"
-        offenses_count: "Количество замечаний"
-        commit_id: "ID коммита"
-        message: "Сообщение"
-        rule_id: "Идентификатор правила"
-        line_column: "Строка и символ"
+        commmit_id: "ID коммита"
+        passed: "Проверка пройдена?"
         button:
-          back: "Перейти к репозиторию"
-  repositories:
-    index:
-      new_repository: "Добавить"
-      name: "Название"
-      language: "Язык"
-      check_status: "Статус последней проверки"
-    show:
-      full_name: "Название"
-      language: "Язык"
-      created_at: "Дата создания"
-      updated_at: "Дата обновления"
-      state: "Статус"
-      commmit_id: "ID коммита"
-      passed: "Проверка пройдена?"
-      button:
-        check: "Проверить"
-    new:
-      create_repository: "Создать Repository"
+          check: "Проверить"
+      new:
+        create_repository: "Создать Repository"
