@@ -1,1 +1,10 @@
 ru:
+  activerecord:
+    attributes:
+      repository/check:
+        state:
+          pending: "Ожидание"
+          cloning: "Клонирование"
+          checking: "Проверка"
+          completed: "Завершенa"
+          failed: "Ошибка"

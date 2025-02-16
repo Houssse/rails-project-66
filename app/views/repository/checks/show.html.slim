@@ -9,7 +9,7 @@ table class="table"
       td = I18n.l(@check.created_at, format: :default)
     tr
       td = t('.state')
-      td = @check.state
+      td = @check.state_label
     tr
       td = t('.passed')
       td = @check.passed

@@ -2,6 +2,8 @@
 
 module Repository
   class Check < ApplicationRecord
+    include AASM
+
     belongs_to :repository, class_name: 'Repository::Repo', inverse_of: :checks
     has_many :offenses, class_name: 'Repository::CheckOffense', dependent: :destroy
 
@@ -33,6 +35,10 @@ module Repository
       event :restart do
         transitions from: %i[completed failed], to: :pending
       end
+    end
+
+    def state_label
+      I18n.t("activerecord.attributes.repository/check.state.#{aasm.current_state}")
     end
 
     def run_check!
