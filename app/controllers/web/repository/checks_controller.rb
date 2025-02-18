@@ -14,9 +14,9 @@ module Web
 
         case @repository.language
         when 'javascript'
-          Repository::CheckJavascriptJob.perform_later(check.id)
+          ::Repository::CheckJavascriptJob.perform_later(check.id)
         when 'ruby'
-          Repository::CheckRubyJob.perform_later(check.id)
+          ::Repository::CheckRubyJob.perform_later(check.id)
         end
 
         redirect_to repository_path(@repository)
