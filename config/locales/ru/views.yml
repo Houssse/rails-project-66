@@ -63,5 +63,6 @@ ru:
         passed: "Проверка пройдена?"
         button:
           check: "Проверить"
-      new:
-        create_repository: "Создать Repository"
+  repositories:
+    new:
+      create_repository: "Создать Repository"
