@@ -8,7 +8,7 @@ one:
   image_url: MyString
 
 two:
-  email: MyString
+  email: MyString2
   nickname: MyString
   token: MyString
   name: MyString

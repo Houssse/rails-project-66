@@ -4,7 +4,7 @@ class Repository < ApplicationRecord
   extend Enumerize
 
   belongs_to :user
-  has_many :checks , foreign_key: 'repository_id', dependent: :destroy,
+  has_many :checks, dependent: :destroy,
                     inverse_of: :repository
 
   enumerize :language, in: %w[ruby javascript], predicates: true

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WebhookCreator
   def initialize(repository, user)
     @repository = repository
@@ -10,7 +12,7 @@ class WebhookCreator
     client = Octokit::Client.new(access_token: @user.token)
 
     base_url = ENV.fetch('BASE_URL') do
-      Rails.logger.error "BASE_URL is not set. Webhook not created."
+      Rails.logger.error 'BASE_URL is not set. Webhook not created.'
       return
     end
 
