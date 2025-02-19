@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Repository
+module RepositoryJobs
   class ApplicationJob < ApplicationJob
     def clone_repository(repo_dir, repo_full_name)
       FileUtils.rm_rf(repo_dir)

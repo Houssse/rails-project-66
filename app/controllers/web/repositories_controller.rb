@@ -16,12 +16,13 @@ module Web
     def new
       client = ApplicationContainer[:github_client].new(access_token: current_user.token, auto_paginate: true)
       @repos = client.repos
-      @repository = ::Repository::Repo.new
+      @repository = ::Repository.new
     end
 
     def create
       client = ApplicationContainer[:github_client].new(access_token: current_user.token)
-      github_repo = client.repo(params[:repository_repo][:github_id].to_i)
+      debugger
+      github_repo = client.repo(params[:repository][:github_id].to_i)
       repository = current_user.repositories.new(
         name: github_repo[:name],
         github_id: github_repo[:id],

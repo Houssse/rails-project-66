@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Repository
-  class CheckRubyJob < Repository::ApplicationJob
+module RepositoryJobs
+  class CheckRubyJob < RepositoryJobs::ApplicationJob
     queue_as :default
 
     def perform(check_id)
