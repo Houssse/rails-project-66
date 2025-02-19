@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Repository < ApplicationRecord
-  after_create :setup_webhook
-
   extend Enumerize
+  
+  after_create :setup_webhook
 
   belongs_to :user
   has_many :checks , foreign_key: 'repository_id', dependent: :destroy,
