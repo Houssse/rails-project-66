@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module RepositoryJobs
   class CreateWebhookJob < RepositoryJobs::ApplicationJob
     queue_as :default
