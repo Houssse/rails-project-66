@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-class Repository::Check < ApplicationRecord
+class Repository::Check < ApplicationRecord # rubocop:disable Style/ClassAndModuleChildren
   include AASM
 
   belongs_to :repository, class_name: 'Repository', inverse_of: :checks
-  has_many :offenses, class_name: 'Repository::CheckOffense', dependent: :destroy
+  has_many :offenses, class_name: 'CheckOffense', dependent: :destroy
 
   aasm column: 'state' do
     state :pending, initial: true
