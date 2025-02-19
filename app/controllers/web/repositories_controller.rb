@@ -21,7 +21,6 @@ module Web
 
     def create
       client = ApplicationContainer[:github_client].new(access_token: current_user.token)
-      debugger
       github_repo = client.repo(params[:repository][:github_id].to_i)
       repository = current_user.repositories.new(
         name: github_repo[:name],
@@ -32,6 +31,7 @@ module Web
         ssh_url: github_repo[:ssh_url]
       )
       if repository.save
+        RepositoryJobs::CreateWebhookJob.perform_later(repository.id, current_user.id)
         redirect_to repositories_path
       else
         redirect_to new_repository_path
