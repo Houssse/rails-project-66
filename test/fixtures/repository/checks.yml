@@ -3,9 +3,9 @@
 one:
   repository: one
   commit_id: MyString
-  state: MyString
+  aasm_state: MyString
 
 two:
   repository: two
   commit_id: MyString
-  state: MyString
+  aasm_state: MyString

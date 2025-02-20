@@ -38,7 +38,7 @@ ru:
         show:
           check: "Проверка #%{check_id}"
           created_at: "Дата создания"
-          state: "Статус"
+          aasm_state: "Статус"
           passed: "Проверка пройдена"
           offenses_count: "Количество замечаний"
           commit_id: "ID коммита"
@@ -58,7 +58,7 @@ ru:
         language: "Язык"
         created_at: "Дата создания"
         updated_at: "Дата обновления"
-        state: "Статус"
+        aasm_state: "Статус"
         commmit_id: "ID коммита"
         passed: "Проверка пройдена?"
         button:

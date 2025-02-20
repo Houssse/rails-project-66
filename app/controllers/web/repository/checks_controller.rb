@@ -10,7 +10,7 @@ module Web
       end
 
       def create
-        check = @repository.checks.create!(state: 'pending')
+        check = @repository.checks.create!(aasm_state: 'pending')
 
         case @repository.language
         when 'javascript'

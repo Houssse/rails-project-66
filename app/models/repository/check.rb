@@ -6,7 +6,7 @@ class Repository::Check < ApplicationRecord # rubocop:disable Style/ClassAndModu
   belongs_to :repository, class_name: 'Repository', inverse_of: :checks
   has_many :offenses, class_name: 'CheckOffense', dependent: :destroy
 
-  aasm column: 'state' do
+  aasm column: 'aasm_state' do
     state :pending, initial: true
     state :cloning
     state :checking
@@ -34,8 +34,8 @@ class Repository::Check < ApplicationRecord # rubocop:disable Style/ClassAndModu
     end
   end
 
-  def state_label
-    I18n.t("activerecord.attributes.repository/check.state.#{aasm.current_state}")
+  def aasm_state_label
+    I18n.t("activerecord.attributes.repository/check.aasm_state.#{aasm.current_state}")
   end
 
   def run_check!

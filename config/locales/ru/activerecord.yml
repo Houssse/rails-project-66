@@ -2,7 +2,7 @@ ru:
   activerecord:
     attributes:
       repository/check:
-        state:
+        aasm_state:
           pending: "Ожидание"
           cloning: "Клонирование"
           checking: "Проверка"

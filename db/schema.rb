@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_19_183923) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_20_163352) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,7 +43,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_19_183923) do
   create_table "repository_checks", force: :cascade do |t|
     t.bigint "repository_id", null: false
     t.string "commit_id"
-    t.string "state"
+    t.string "aasm_state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "passed", default: false, null: false

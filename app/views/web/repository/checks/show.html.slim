@@ -8,8 +8,8 @@ table class="table"
       td = t('.created_at')
       td = I18n.l(@check.created_at, format: :default)
     tr
-      td = t('.state')
-      td = @check.state_label
+      td = t('.aasm_state')
+      td = @check.aasm_state_label
     tr
       td = t('.passed')
       td = @check.passed

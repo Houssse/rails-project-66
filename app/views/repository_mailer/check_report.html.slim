@@ -1,6 +1,6 @@
 h1 Отчёт о проверке репозитория #{@repository.full_name}
 
-p Состояние проверки: #{@check.state}
+p Состояние проверки: #{@check.aasm_state}
 p Результат: #{@check.passed ? 'Успешно' : 'С ошибками'}
 
 - if @check.offenses.any?
