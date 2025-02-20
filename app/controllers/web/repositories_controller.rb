@@ -20,6 +20,11 @@ module Web
     end
 
     def create
+      if params[:repository][:github_id].blank?
+        redirect_to new_repository_path
+        return
+      end
+  
       client = ApplicationContainer[:github_client].new(access_token: current_user.token)
       github_repo = client.repo(params[:repository][:github_id].to_i)
       repository = current_user.repositories.new(
