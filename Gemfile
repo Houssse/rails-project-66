@@ -52,6 +52,7 @@ gem 'sentry-ruby'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'stackprof'
+gem 'pundit'
 
 # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
 gem 'rubocop', require: false
