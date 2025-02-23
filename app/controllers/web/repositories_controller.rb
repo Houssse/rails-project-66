@@ -5,7 +5,7 @@ module Web
     before_action :authenticate_user!
 
     def index
-      @repositories =  @repositories = policy_scope(::Repository)
+      @repositories = @repositories = policy_scope(::Repository)
       authorize @repositories
     end
 
@@ -38,7 +38,7 @@ module Web
         clone_url: github_repo[:clone_url],
         ssh_url: github_repo[:ssh_url]
       )
-      
+
       authorize repository
 
       if repository.save

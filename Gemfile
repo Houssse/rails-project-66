@@ -47,12 +47,12 @@ gem 'octokit'
 gem 'omniauth-github'
 gem 'omniauth-rails_csrf_protection'
 gem 'pg'
+gem 'pundit'
 gem 'sentry-rails'
 gem 'sentry-ruby'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'stackprof'
-gem 'pundit'
 
 # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
 gem 'rubocop', require: false

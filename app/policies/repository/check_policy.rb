@@ -1,4 +1,6 @@
-class Repository::CheckPolicy < ApplicationPolicy
+# frozen_string_literal: true
+
+class Repository::CheckPolicy < ApplicationPolicy # rubocop:disable Style/ClassAndModuleChildren
   def show?
     user_owns_repository?
   end

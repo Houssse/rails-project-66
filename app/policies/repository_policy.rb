@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RepositoryPolicy < ApplicationPolicy
   def index?
     user.present?
@@ -18,6 +20,7 @@ class RepositoryPolicy < ApplicationPolicy
   class Scope < ApplicationPolicy::Scope
     def resolve
       return scope.none unless user
+
       scope.where(user: user)
     end
   end
