@@ -6,11 +6,8 @@ module Api
 
     def create
       payload = request.body.read
-      signature = request.headers['X-Hub-Signature-256']
-
-      return head :unauthorized unless valid_signature?(payload, signature)
-
       event = request.headers['X-GitHub-Event']
+
       return head :ok unless event == 'push'
 
       data = JSON.parse(payload)
@@ -22,7 +19,7 @@ module Api
 
       check = repository.checks.create!(commit_id: commit_id, status: :pending)
 
-      case @repository.language
+      case repository.language
       when 'javascript'
         Repository::CheckJavascriptJob.perform_later(check.id)
       when 'ruby'
@@ -30,16 +27,6 @@ module Api
       end
 
       head :ok
-    end
-
-    private
-
-    def valid_signature?(payload, signature)
-      secret = ENV.fetch('GITHUB_WEBHOOK_SECRET', nil)
-      return false unless secret && signature
-
-      digest = OpenSSL::HMAC.hexdigest('SHA256', secret, payload)
-      ActiveSupport::SecurityUtils.secure_compare("sha256=#{digest}", signature)
     end
   end
 end

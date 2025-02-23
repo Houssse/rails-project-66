@@ -23,8 +23,7 @@ class WebhookCreator
       'web',
       {
         url: webhook_url,
-        content_type: 'json',
-        secret: ENV.fetch('GITHUB_WEBHOOK_SECRET', nil)
+        content_type: 'json'
       },
       {
         events: ['push'],
