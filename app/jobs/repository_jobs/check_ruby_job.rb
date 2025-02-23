@@ -21,7 +21,7 @@ module RepositoryJobs
       check.start_checking!
       run_rubocop(check, repo_dir)
 
-      check.complete!
+      check.finished!
 
       RepositoryMailer.check_report(check.repository.user, check).deliver_later if !check.passed || check.offenses.any?
     rescue StandardError => e
