@@ -16,5 +16,9 @@ class RepositoryPolicy < ApplicationPolicy
   end
 
   class Scope < ApplicationPolicy::Scope
+    def resolve
+      return scope.none unless user
+      scope.where(user: user)
+    end
   end
 end

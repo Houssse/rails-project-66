@@ -43,8 +43,7 @@ class ApplicationPolicy
     end
 
     def resolve
-      return scope.none unless user
-      scope.where(user: user)
+      raise NoMethodError, "You must define #resolve in #{self.class}"
     end
 
     private
