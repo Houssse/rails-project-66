@@ -5,7 +5,15 @@ class ApplicationController < ActionController::Base
   include AuthenticationManagement
   include Pundit::Authorization
 
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   def test_sentry
     raise 'Проверка работы Sentry!'
+  end
+
+  private
+
+  def user_not_authorized
+    redirect_to root_path
   end
 end

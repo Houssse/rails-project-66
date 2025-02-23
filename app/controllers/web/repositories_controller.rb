@@ -5,11 +5,13 @@ module Web
     before_action :authenticate_user!
 
     def index
-      @repositories = current_user.repositories
+      @repositories =  @repositories = policy_scope(::Repository)
+      authorize @repositories
     end
 
     def show
       @repository = current_user.repositories.find(params[:id])
+      authorize @repository
       @checks = @repository.checks
     end
 
@@ -17,6 +19,7 @@ module Web
       client = ApplicationContainer[:github_client].new(access_token: current_user.token, auto_paginate: true)
       @repos = client.repos
       @repository = ::Repository.new
+      authorize @repository
     end
 
     def create
@@ -35,6 +38,9 @@ module Web
         clone_url: github_repo[:clone_url],
         ssh_url: github_repo[:ssh_url]
       )
+      
+      authorize repository
+
       if repository.save
         RepositoryJobs::CreateWebhookJob.perform_later(repository.id, current_user.id)
         redirect_to repositories_path
