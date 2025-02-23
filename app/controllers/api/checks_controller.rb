@@ -18,14 +18,9 @@ module Api
       return head :not_found unless repository
 
       check = repository.checks.create!(commit_id: commit_id, status: :pending)
-
-      case repository.language
-      when 'javascript'
-        Repository::CheckJavascriptJob.perform_later(check.id)
-      when 'ruby'
-        Repository::CheckRubyJob.perform_later(check.id)
-      end
-
+      
+      CheckRepositoryJob.perform_later(check_id)
+      
       head :ok
     end
   end
