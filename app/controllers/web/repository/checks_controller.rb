@@ -10,7 +10,7 @@ module Web
       end
 
       def create
-        check = @repository.checks.create!(aasm_state: 'pending')
+        check = @repository.checks.create!
 
         ::RepositoryJobs::CheckRepositoryJob.perform_later(check.id)
 
