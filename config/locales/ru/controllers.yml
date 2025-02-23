@@ -1,1 +1,13 @@
 ru:
+  controllers:
+    web:
+      repository:
+        notice:
+          check: 'Начата проверка'
+      repositories:
+          should_sign_in: 'asffas'
+    concerns:
+      authentication_management:
+        error: 'Выполните вход'
+
+          

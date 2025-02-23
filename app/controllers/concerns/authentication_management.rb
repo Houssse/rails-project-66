@@ -14,8 +14,7 @@ module AuthenticationManagement
   def authenticate_user!
     return if signed_in?
 
-    flash[:alert] = t('.should_sign_in')
-    redirect_to root_path
+    redirect_to root_path, alert: I18n.t('controllers.concerns.authentication_management.error')
   end
 
   private

@@ -1,0 +1,10 @@
+- if flash[:notice]
+  .container
+    .alert.alert-info.alert-dismissible.fade.show role="alert" data-controller="flash"
+      = flash[:notice]
+      button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"
+- if flash[:alert]
+  .container
+    .alert.alert-danger.alert-dismissible.fade.show role="alert" data-controller="flash"
+      = flash[:alert]
+      button.btn-close type="button" data-bs-dismiss="alert" aria-label="Close"

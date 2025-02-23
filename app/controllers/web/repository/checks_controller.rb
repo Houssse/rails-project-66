@@ -14,7 +14,7 @@ module Web
 
         ::RepositoryJobs::CheckRepositoryJob.perform_later(check.id)
 
-        redirect_to repository_path(@repository)
+        redirect_to repository_path(@repository), notice: I18n.t('controllers.web.repository.notice.check')
       end
 
       private
