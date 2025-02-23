@@ -10,7 +10,7 @@ class Repository::Check < ApplicationRecord # rubocop:disable Style/ClassAndModu
     state :pending, initial: true
     state :cloning
     state :checking
-    state :completed
+    state :finished
     state :failed
 
     event :start_cloning do
@@ -21,8 +21,8 @@ class Repository::Check < ApplicationRecord # rubocop:disable Style/ClassAndModu
       transitions from: :cloning, to: :checking
     end
 
-    event :complete do
-      transitions from: %i[checking cloning], to: :completed
+    event :finished do
+      transitions from: %i[checking cloning], to: :finished
     end
 
     event :fail do
@@ -30,7 +30,7 @@ class Repository::Check < ApplicationRecord # rubocop:disable Style/ClassAndModu
     end
 
     event :restart do
-      transitions from: %i[completed failed], to: :pending
+      transitions from: %i[finished failed], to: :pending
     end
   end
 

@@ -6,5 +6,5 @@ ru:
           pending: "Ожидание"
           cloning: "Клонирование"
           checking: "Проверка"
-          completed: "Завершенa"
+          finished: "Завершенa"
           failed: "Ошибка"
