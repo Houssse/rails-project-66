@@ -5,11 +5,15 @@ module RepositoryJobs
     queue_as :default
 
     def perform(check_id)
+      check = Repository::Check.find_by(id: check_id)
+      return unless check
+
+      repository = check.repository
       case repository.language
       when 'javascript'
-        Repository::CheckJavascriptJob.perform_later(check.id)
+        CheckJavascriptJob.perform_later(check.id)
       when 'ruby'
-        Repository::CheckRubyJob.perform_later(check.id)
+        CheckRubyJob.perform_later(check.id)
       end
     end
   end

@@ -18,9 +18,9 @@ module Api
       return head :not_found unless repository
 
       check = repository.checks.create!(commit_id: commit_id, status: :pending)
-      
-      CheckRepositoryJob.perform_later(check_id)
-      
+
+      ::RepositoryJobs::CheckRepositoryJob.perform_later(check.id)
+
       head :ok
     end
   end

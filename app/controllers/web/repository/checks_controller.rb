@@ -6,18 +6,13 @@ module Web
       before_action :set_repository
 
       def show
-        @check = @repository.checks.find(params[:id])
+        @check = ::Repository::Check.includes(:repository).find(params[:id])
       end
 
       def create
         check = @repository.checks.create!(aasm_state: 'pending')
 
-        case @repository.language
-        when 'javascript'
-          ::RepositoryJobs::CheckJavascriptJob.perform_later(check.id)
-        when 'ruby'
-          ::RepositoryJobs::CheckRubyJob.perform_later(check.id)
-        end
+        ::RepositoryJobs::CheckRepositoryJob.perform_later(check.id)
 
         redirect_to repository_path(@repository)
       end
