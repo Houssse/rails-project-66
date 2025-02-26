@@ -20,7 +20,7 @@ module Web
 
       redirect_to root_path
     rescue StandardError => e
-      redirect_to root_path, alert: "Ошибка входа: #{e.message}"
+      redirect_to root_path, alert: I18n.t('controllers.web.auth.alert.error')
     end
 
     def destroy

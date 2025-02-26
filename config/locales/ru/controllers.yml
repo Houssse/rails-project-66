@@ -1,6 +1,9 @@
 ru:
   controllers:
     web:
+      auth:
+        alert:
+          error: 'Ошибка входа'
       repository:
         notice:
           check: 'Начата проверка'
