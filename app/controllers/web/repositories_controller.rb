@@ -5,8 +5,7 @@ module Web
     before_action :authenticate_user!
 
     def index
-      @repositories = @repositories = policy_scope(::Repository)
-      authorize @repositories
+      @repositories = current_user.repositories.includes(:checks)
     end
 
     def show
