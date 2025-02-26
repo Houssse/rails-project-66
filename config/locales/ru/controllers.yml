@@ -3,17 +3,13 @@ ru:
     repositories:
       create:
         success: 'Репозиторий добавлен'
-  controllers:
-    web:
-      auth:
-        alert:
-          error: 'Ошибка входа'
-        notice:
-          sign_in: 'Вы успешно вошли'
-          sign_out: 'Вы вышли из системы'
-      repository:
-        notice:
-          check: 'Начата проверка'
+    auth:
+      sign_in: 'Вы успешно вошли'
+      sign_out: 'Вы вышли из системы'
+      error: 'Ошибка входа'
+    repository:
+      checks:
+        check: 'Начата проверка'
     concerns:
       authentication_management:
         error: 'Выполните вход'

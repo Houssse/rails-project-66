@@ -18,15 +18,15 @@ module Web
 
       session[:user_id] = user.id
 
-      redirect_to root_path, notice: I18n.t('controllers.web.auth.notice.sign_in')
+      redirect_to root_path, notice: t('.sign_in')
     rescue StandardError
-      redirect_to root_path, alert: I18n.t('controllers.web.auth.alert.error')
+      redirect_to root_path, alert: t('.error')
     end
 
     def destroy
       session[:user_id] = nil
 
-      redirect_to root_path, notice: I18n.t('controllers.web.auth.notice.sign_out')
+      redirect_to root_path, notice: t('.sign_out')
     end
   end
 end
