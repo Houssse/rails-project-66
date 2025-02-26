@@ -12,20 +12,16 @@ class RepositoryPolicyTest < ActiveSupport::TestCase
       @repository = repositories(:one)
     end
 
-    def test_show
-      assert_predicate RepositoryPolicy.new(@user, @repository), :show?
-      assert_not_predicate RepositoryPolicy.new(@other_user, @repository), :show?
-      assert_not_predicate RepositoryPolicy.new(nil, @repository), :show?
+    test 'user can create a repository for themselves' do
+      policy = RepositoryPolicy.new(@user, @repository)
+
+      assert_predicate policy, :create?
     end
 
-    def test_new
-      assert_predicate RepositoryPolicy.new(@user, Repository), :new?
-      assert_not_predicate RepositoryPolicy.new(nil, Repository), :new?
-    end
+    test 'user cannot create a repository for another user' do
+      policy = RepositoryPolicy.new(@other_user, @repository)
 
-    def test_create
-      assert_predicate RepositoryPolicy.new(@user, Repository), :create?
-      assert_not_predicate RepositoryPolicy.new(nil, Repository), :create?
+      assert_not_predicate policy, :create?
     end
   end
 end

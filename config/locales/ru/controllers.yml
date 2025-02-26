@@ -1,4 +1,8 @@
 ru:
+  web:
+    repositories:
+      create:
+        success: 'Репозиторий добавлен'
   controllers:
     web:
       auth:
@@ -10,8 +14,6 @@ ru:
       repository:
         notice:
           check: 'Начата проверка'
-      repositories:
-          should_sign_in: 'asffas'
     concerns:
       authentication_management:
         error: 'Выполните вход'

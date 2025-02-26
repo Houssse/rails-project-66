@@ -14,7 +14,6 @@ module Web
 
     def show
       @repository = current_user.repositories.find(params[:id])
-      authorize @repository
       @checks = @repository.checks
                            .order(id: :desc)
                            .page(params[:page])
@@ -25,34 +24,26 @@ module Web
       client = ApplicationContainer[:github_client].new(access_token: current_user.token, auto_paginate: true)
       @repos = client.repos
       @repository = current_user.repositories.build
-      authorize @repository
     end
 
     def create
-      if params[:repository][:github_id].blank?
-        redirect_to new_repository_path
-        return
-      end
+      @repository = current_user.repositories.find_or_initialize_by(repository_params)
 
-      client = ApplicationContainer[:github_client].new(access_token: current_user.token)
-      github_repo = client.repo(params[:repository][:github_id].to_i)
-      repository = current_user.repositories.new(
-        name: github_repo[:name],
-        github_id: github_repo[:id],
-        full_name: github_repo[:full_name],
-        language: github_repo[:language].to_s.downcase,
-        clone_url: github_repo[:clone_url],
-        ssh_url: github_repo[:ssh_url]
-      )
+      authorize @repository
 
-      authorize repository
-
-      if repository.save
-        RepositoryJobs::CreateWebhookJob.perform_later(repository.id, current_user.id)
-        redirect_to repositories_path
+      if @repository.save
+        RepositoryJobs::UpdateInfoRepositoryJob.perform_later(@repository.id)
+        redirect_to repositories_path, notice: t('.success')
       else
-        redirect_to new_repository_path
+        flash[:alert] = @repository.errors.full_messages.join('\n')
+        redirect_to action: :new
       end
+    end
+
+    private
+
+    def repository_params
+      params.require(:repository).permit(:github_id)
     end
   end
 end
