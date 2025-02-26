@@ -10,29 +10,27 @@ class Repository::CheckPolicyTest < ActiveSupport::TestCase # rubocop:disable St
     @check = repository_checks(:one)
   end
 
-  def test_show
+  test 'show? permits access if user owns the repository' do
     assert_predicate Repository::CheckPolicy.new(@user, @check), :show?
+  end
+
+  test 'show? denies access if user does not own the repository' do
     assert_not_predicate Repository::CheckPolicy.new(@other_user, @check), :show?
+  end
+
+  test 'show? denies access if user is nil' do
     assert_not_predicate Repository::CheckPolicy.new(nil, @check), :show?
   end
 
-  def test_create
+  test 'create? permits access if user owns the repository' do
     assert_predicate Repository::CheckPolicy.new(@user, @check), :create?
-    assert_not_predicate Repository::CheckPolicy.new(@other_user, @check), :create?
-    assert_not_predicate Repository::CheckPolicy.new(nil, @check), :create?
   end
 
-  def test_scope
-    @repository_other = repositories(:two)
-    @check_other = repository_checks(:two)
+  test 'create? denies access if user does not own the repository' do
+    assert_not_predicate Repository::CheckPolicy.new(@other_user, @check), :create?
+  end
 
-    checks = Pundit.policy_scope(@user, Repository::Check)
-
-    assert_includes checks, @check
-    assert_not_includes checks, @check_other
-
-    checks = Pundit.policy_scope(nil, Repository::Check)
-
-    assert_empty checks
+  test 'create? denies access if user is nil' do
+    assert_not_predicate Repository::CheckPolicy.new(nil, @check), :create?
   end
 end

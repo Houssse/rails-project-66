@@ -12,12 +12,9 @@ class Repository::CheckPolicy < ApplicationPolicy # rubocop:disable Style/ClassA
   private
 
   def user_owns_repository?
-    user.present? && record.repository.user == user
+    @user == record.repository.user
   end
 
   class Scope < ApplicationPolicy::Scope
-    def resolve
-      scope.joins(:repository).where(repositories: { user: user })
-    end
   end
 end

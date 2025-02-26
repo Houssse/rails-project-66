@@ -14,6 +14,7 @@ module Web
 
     def show
       @repository = current_user.repositories.find(params[:id])
+      authorize @repository
       @checks = @repository.checks
                            .order(id: :desc)
                            .page(params[:page])
@@ -24,11 +25,11 @@ module Web
       client = ApplicationContainer[:github_client].new(access_token: current_user.token, auto_paginate: true)
       @repos = client.repos
       @repository = current_user.repositories.build
+      authorize @repository
     end
 
     def create
       @repository = current_user.repositories.find_or_initialize_by(repository_params)
-
       authorize @repository
 
       if @repository.save
