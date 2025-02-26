@@ -1,4 +1,9 @@
 ru:
+  pagination:
+    first: "«"
+    prev: "‹"
+    next: "›"
+    last: "»" 
   time:
     formats:
       default: "%d %B %Y, %H:%M"

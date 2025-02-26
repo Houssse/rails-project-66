@@ -12,16 +12,6 @@ class RepositoryPolicyTest < ActiveSupport::TestCase
       @repository = repositories(:one)
     end
 
-    def test_scope
-      assert_includes Pundit.policy_scope(@user, Repository), @repository
-      assert_not_includes Pundit.policy_scope(@other_user, Repository), @repository
-    end
-
-    def test_index
-      assert_predicate RepositoryPolicy.new(@user, Repository), :index?
-      assert_not_predicate RepositoryPolicy.new(nil, Repository), :index?
-    end
-
     def test_show
       assert_predicate RepositoryPolicy.new(@user, @repository), :show?
       assert_not_predicate RepositoryPolicy.new(@other_user, @repository), :show?

@@ -31,7 +31,7 @@ table.table.table-striped
       th[scope="col"] = t('.passed')
       th[scope="col"] = t('.created_at')
   tbody
-    - @repository.checks.each do |check|
+    - @checks.each do |check|
       tr
         td = link_to check.id, repository_check_path(@repository, check)
         td = check.aasm_state_label
@@ -41,3 +41,5 @@ table.table.table-striped
             = check.commit_id&.first(7)
         td = check.passed
         td = I18n.l(check.created_at, format: :short)
+
+= paginate @checks

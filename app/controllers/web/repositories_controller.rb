@@ -5,13 +5,20 @@ module Web
     before_action :authenticate_user!
 
     def index
-      @repositories = current_user.repositories.includes(:checks)
+      @repositories = current_user.repositories
+                                  .includes(:checks)
+                                  .order(created_at: :desc)
+                                  .page(params[:page])
+                                  .per(5)
     end
 
     def show
       @repository = current_user.repositories.find(params[:id])
       authorize @repository
       @checks = @repository.checks
+                           .order(created_at: :desc)
+                           .page(params[:page])
+                           .per(5)
     end
 
     def new
