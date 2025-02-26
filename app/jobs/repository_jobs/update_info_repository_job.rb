@@ -17,8 +17,18 @@ module RepositoryJobs
         clone_url: github_repo[:clone_url],
         ssh_url: github_repo[:ssh_url]
       )
+
+      create_webhook(repository)
     rescue StandardError => e
       Rails.logger.error "Failed to update repository #{repository_id}: #{e.message}"
+    end
+
+    private
+
+    def create_webhook(repository)
+      WebhookCreator.new(repository, repository.user).call
+    rescue StandardError => e
+      Rails.logger.error "Failed to create webhook for repository #{repository.id}: #{e.message}"
     end
   end
 end
