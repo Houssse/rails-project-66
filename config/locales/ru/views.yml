@@ -65,4 +65,4 @@ ru:
           check: "Проверить"
   repositories:
     new:
-      create_repository: "Создать Repository"
+      create_repository: "Добавить Repository"
