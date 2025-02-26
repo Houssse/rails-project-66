@@ -10,6 +10,7 @@ module RepositoryJobs
       client = ApplicationContainer[:github_client].new(access_token: repository.user.token)
       github_repo = client.repo(repository.github_id)
 
+      # Обновляем информацию о репозитории
       repository.update!(
         name: github_repo[:name],
         full_name: github_repo[:full_name],
@@ -19,6 +20,8 @@ module RepositoryJobs
       )
 
       create_webhook(repository)
+
+      create_and_run_check(repository)
     rescue StandardError => e
       Rails.logger.error "Failed to update repository #{repository_id}: #{e.message}"
     end
@@ -29,6 +32,13 @@ module RepositoryJobs
       WebhookCreator.new(repository, repository.user).call
     rescue StandardError => e
       Rails.logger.error "Failed to create webhook for repository #{repository.id}: #{e.message}"
+    end
+
+    def create_and_run_check(repository)
+      check = repository.checks.create!
+      ::RepositoryJobs::CheckRepositoryJob.perform_later(check.id)
+    rescue StandardError => e
+      Rails.logger.error "Failed to create or run check for repository #{repository.id}: #{e.message}"
     end
   end
 end
