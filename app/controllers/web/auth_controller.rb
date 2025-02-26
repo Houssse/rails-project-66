@@ -7,7 +7,7 @@ module Web
 
       auth_params = { email: auth['info']['email'] }
 
-      user = User.find_or_create_by! auth_params
+      user = User.find_or_create_by!(auth_params)
       user.email = auth['info']['email']
       user.name = auth['info']['name']
       user.nickname = auth['info']['nickname']
@@ -18,15 +18,15 @@ module Web
 
       session[:user_id] = user.id
 
-      redirect_to root_path
-    rescue StandardError => e
+      redirect_to root_path, notice: I18n.t('controllers.web.auth.notice.sign_in')
+    rescue StandardError
       redirect_to root_path, alert: I18n.t('controllers.web.auth.alert.error')
     end
 
     def destroy
       session[:user_id] = nil
 
-      redirect_to root_path
+      redirect_to root_path, notice: I18n.t('controllers.web.auth.notice.sign_out')
     end
   end
 end

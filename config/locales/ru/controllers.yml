@@ -4,6 +4,9 @@ ru:
       auth:
         alert:
           error: 'Ошибка входа'
+        notice:
+          sign_in: 'Вы успешно вошли'
+          sign_out: 'Вы вышли из системы'
       repository:
         notice:
           check: 'Начата проверка'
