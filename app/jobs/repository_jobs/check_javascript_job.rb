@@ -36,13 +36,13 @@ module RepositoryJobs
 
       bash_runner = ApplicationContainer[:bash_runner]
       stdout, exit_status = bash_runner.execute(command)
-      
-      check.update!(passed: exit_status == 0)
+
+      check.update!(passed: exit_status.zero?)
 
       cleaned_output = clean_eslint_output(stdout)
 
       if cleaned_output.strip.empty?
-        Rails.logger.error("ESLint output is empty or invalid.")
+        Rails.logger.error('ESLint output is empty or invalid.')
         return
       end
 

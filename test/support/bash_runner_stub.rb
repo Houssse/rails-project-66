@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BashRunnerStub
   class << self
     attr_accessor :custom_response, :command_filter

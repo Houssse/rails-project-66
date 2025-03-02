@@ -34,11 +34,11 @@ module RepositoryJobs
     def run_rubocop(check, repo_dir)
       rubocop_config = Rails.root.join('lib/linters/.rubocop.yml')
       command = "rubocop --config #{rubocop_config} --format json #{repo_dir}"
-      
+
       bash_runner = ApplicationContainer[:bash_runner]
       stdout, exit_status = bash_runner.execute(command)
-      
-      check.update!(passed: exit_status == 0)
+
+      check.update!(passed: exit_status.zero?)
       offenses_data = JSON.parse(stdout)
       save_offenses(check, offenses_data)
     end
