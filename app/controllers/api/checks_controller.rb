@@ -6,9 +6,6 @@ module Api
 
     def create
       payload = request.body.read
-      event = request.headers['X-GitHub-Event']
-
-      return head :ok unless event == 'push'
 
       data = JSON.parse(payload)
       repo_full_name = data.dig('repository', 'full_name')
