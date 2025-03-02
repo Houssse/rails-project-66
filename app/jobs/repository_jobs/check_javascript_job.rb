@@ -32,43 +32,34 @@ module RepositoryJobs
     private
 
     def run_eslint(check, repo_dir)
-      stdout_str = +''
-      stderr_str = +''
+      command = "yarn eslint --config lib/linters/eslint.config.js --format json \"#{repo_dir}/**/*.js\""
 
-      Open3.popen3(
-        "yarn eslint --config lib/linters/eslint.config.js --format json \"#{repo_dir}/**/*.js\""
-      ) do |_stdin, stdout, stderr, wait_thr|
-        stdout_thread = Thread.new { stdout.each { |line| stdout_str << line } }
-        stderr_thread = Thread.new { stderr.each { |line| stderr_str << line } }
+      bash_runner = ApplicationContainer[:bash_runner]
+      stdout, exit_status = bash_runner.execute(command)
+      
+      check.update!(passed: exit_status == 0)
 
-        stdout_thread.join
-        stderr_thread.join
-
-        exit_status = wait_thr.value
-        check.update!(passed: exit_status.success?)
-      end
-
-      cleaned_output = stdout_str.lines
-                                 .reject { |line| line.strip.start_with?('info') }
-                                 .drop_while { |line| !line.strip.start_with?('[') }
-                                 .join
+      cleaned_output = clean_eslint_output(stdout)
 
       if cleaned_output.strip.empty?
-        Rails.logger.error("Failed to extract JSON from ESLint output. stderr: #{stderr_str}")
+        Rails.logger.error("ESLint output is empty or invalid.")
         return
       end
 
       save_eslint_offenses(check, cleaned_output)
+    rescue JSON::ParserError => e
+      Rails.logger.error("Failed to parse ESLint output: #{e.message}")
+    end
+
+    def clean_eslint_output(stdout)
+      stdout.lines
+            .reject { |line| line.strip.start_with?('info') }
+            .drop_while { |line| !line.strip.start_with?('[') }
+            .join
     end
 
     def save_eslint_offenses(check, eslint_output)
-      begin
-        offenses_data = JSON.parse(eslint_output)
-      rescue JSON::ParserError => e
-        Rails.logger.error("Failed to parse ESLint output: #{e.message}")
-        Rails.logger.debug { "Raw ESLint output: #{eslint_output}" }
-        return
-      end
+      offenses_data = JSON.parse(eslint_output)
 
       offenses_data.each do |file|
         file_path = file['filePath']
@@ -82,6 +73,9 @@ module RepositoryJobs
           )
         end
       end
+    rescue JSON::ParserError => e
+      Rails.logger.error("Failed to parse ESLint output: #{e.message}")
+      Rails.logger.debug { "Raw ESLint output: #{eslint_output}" }
     end
   end
 end

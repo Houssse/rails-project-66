@@ -10,7 +10,6 @@ module RepositoryJobs
       client = ApplicationContainer[:github_client].new(access_token: repository.user.token)
       github_repo = client.repo(repository.github_id)
 
-      # Обновляем информацию о репозитории
       repository.update!(
         name: github_repo[:name],
         full_name: github_repo[:full_name],
