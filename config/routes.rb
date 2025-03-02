@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # test sentry
-  get 'sentry_test', to: 'application#test_sentry'
 
   scope module: :web do
     resources :repositories, only: %i[index show new create] do

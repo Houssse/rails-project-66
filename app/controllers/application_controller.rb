@@ -7,10 +7,6 @@ class ApplicationController < ActionController::Base
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  def test_sentry
-    raise 'Проверка работы Sentry!'
-  end
-
   private
 
   def user_not_authorized
