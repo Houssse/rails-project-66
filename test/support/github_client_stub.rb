@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class GithubClientStub
+  def initialize(*)
+  end
+
   def repos
     [
       { id: 123, name: 'test_repo', full_name: 'user/test_repo', language: 'Ruby' }
