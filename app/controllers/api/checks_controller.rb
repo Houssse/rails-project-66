@@ -14,7 +14,7 @@ module Api
       repository = Repository.find_by(full_name: repo_full_name)
       return head :not_found unless repository
 
-      check = repository.checks.create!(commit_id: commit_id, status: :pending)
+      check = repository.checks.create!(commit_id: commit_id, aasm_state: :pending)
 
       ::RepositoryJobs::CheckRepositoryJob.perform_later(check.id)
 
