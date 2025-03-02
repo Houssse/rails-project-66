@@ -1,17 +1,19 @@
 # frozen_string_literal: true
 
 class GithubClientStub
-  def initialize(*)
-  end
+  def initialize(*); end
 
   def repos
     [
-      { id: 123, name: 'test_repo', full_name: 'user/test_repo', language: 'Ruby' }
+      GithubRepositoryStub.new(
+        id: 123,
+        name: 'test-repo',
+        full_name: 'user/test-repo',
+        language: 'Ruby',
+        clone_url: 'https://github.com/user/test-repo.git',
+        ssh_url: 'git@github.com:user/test-repo.git'
+      )
     ]
-  end
-
-  def repo(_id)
-    { id: 123, name: 'test_repo', full_name: 'user/test_repo', language: 'Ruby' }
   end
 
   def hooks(_repo)
