@@ -24,20 +24,23 @@ end
 
 module ActionDispatch
   class IntegrationTest
-    def sign_in(user, _options = {})
+    def sign_in(user)
       auth_hash = {
         provider: 'github',
         uid: '12345',
         info: {
           email: user.email,
-          name: user.name
+          name: user.name,
+          nickname: 'test_nickname',
+          image: 'http://example.com/avatar.png'
+        },
+        credentials: {
+          token: 'mock_github_token'
         }
       }
 
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash::InfoHash.new(auth_hash)
-
-      get callback_auth_url('github')
-      session[:user_id] = user.id
+      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(auth_hash)
+      get callback_auth_path(:github)
     end
 
     def signed_in?
