@@ -6,20 +6,12 @@ module RepositoryJobs
 
     def perform(check_id)
       check = Repository::Check.find(check_id)
-      check.start_cloning!
 
-      repo_dir = Rails.root.join('storage', 'repositories', check.repository.full_name)
-
-      if Dir.exist?(repo_dir)
-        update_repository(repo_dir)
-      else
-        clone_repository(repo_dir, check.repository.full_name)
-      end
-
-      check.update!(commit_id: latest_commit_id(repo_dir))
+      repository_manager = ApplicationContainer[:repository_manager].new(check)
+      repository_manager.prepare_repository
 
       check.start_checking!
-      run_eslint(check, repo_dir)
+      run_eslint(check, repository_manager.repo_dir)
 
       check.finished!
 
