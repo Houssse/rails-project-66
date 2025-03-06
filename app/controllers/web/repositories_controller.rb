@@ -23,7 +23,7 @@ module Web
 
     def new
       client = ApplicationContainer[:github_client].new(access_token: current_user.token, auto_paginate: true)
-      @repo = client.repo
+      @repos = client.repos
       @repository = current_user.repositories.build
       authorize @repository
     end

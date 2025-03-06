@@ -5,7 +5,7 @@ require_relative 'github_repository_stub'
 class GithubClientStub
   def initialize(*); end
 
-  def repo(_)
+  def repos(_)
     GithubRepositoryStub.new(
       name: 'test-repo',
       full_name: 'user/test-repo',

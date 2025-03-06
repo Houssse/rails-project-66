@@ -8,7 +8,7 @@ module RepositoryJobs
       repository = Repository.find(repository_id)
 
       client = ApplicationContainer[:github_client].new(access_token: repository.user.token)
-      github_repo = client.repo(repository.github_id)
+      github_repo = client.repos(repository.github_id)
 
       repository.update!(
         name: github_repo[:name],
