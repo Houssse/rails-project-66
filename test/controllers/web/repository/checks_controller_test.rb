@@ -18,6 +18,14 @@ module Web
 
         assert_enqueued_with(job: ::RepositoryJobs::CheckRepositoryJob, args: [check.id])
       end
+
+      test 'GET #show assigns the requested check to @check' do
+        check = @repository.checks.create!
+        get repository_check_path(@repository, check)
+
+        assert_response :success
+        assert_equal check, assigns(:check)
+      end
     end
   end
 end
