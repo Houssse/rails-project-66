@@ -18,7 +18,7 @@ module RepositoryJobs
         ssh_url: github_repo[:ssh_url]
       )
 
-      create_webhook(repository)
+      ApplicationContainer[:webhook_creator].new(repository, repository.user).call
 
       create_and_run_check(repository)
     rescue StandardError => e
@@ -26,12 +26,6 @@ module RepositoryJobs
     end
 
     private
-
-    def create_webhook(repository)
-      WebhookCreator.new(repository, repository.user).call
-    rescue StandardError => e
-      Rails.logger.error "Failed to create webhook for repository #{repository.id}: #{e.message}"
-    end
 
     def create_and_run_check(repository)
       check = repository.checks.create!

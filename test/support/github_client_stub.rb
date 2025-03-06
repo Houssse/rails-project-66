@@ -1,19 +1,18 @@
 # frozen_string_literal: true
 
+require_relative 'github_repository_stub'
+
 class GithubClientStub
   def initialize(*); end
 
-  def repos
-    [
-      GithubRepositoryStub.new(
-        id: 123,
-        name: 'test-repo',
-        full_name: 'user/test-repo',
-        language: 'Ruby',
-        clone_url: 'https://github.com/user/test-repo.git',
-        ssh_url: 'git@github.com:user/test-repo.git'
-      )
-    ]
+  def repo(_)
+    GithubRepositoryStub.new(
+      name: 'test-repo',
+      full_name: 'user/test-repo',
+      language: 'Ruby',
+      clone_url: 'https://github.com/user/test-repo.git',
+      ssh_url: 'git@github.com:user/test-repo.git'
+    )
   end
 
   def hooks(_repo)

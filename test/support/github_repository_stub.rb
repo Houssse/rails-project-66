@@ -7,9 +7,7 @@ class GithubRepositoryStub
     @params = params
   end
 
-  def id
-    params[:id] || params['id']
-  end
+  delegate :[], to: :params
 
   def full_name
     params[:full_name] || params['full_name']
