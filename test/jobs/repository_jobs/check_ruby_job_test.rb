@@ -53,7 +53,6 @@ module RepositoryJobs
     test 'perform marks check as failed when rubocop finds issues' do
       BashRunnerStub.stub_command('rubocop', stdout: @offenses_data.to_json, exit_status: 1)
 
-      # Выполняем задачу
       RepositoryJobs::CheckRubyJob.perform_now(@check.id)
 
       @check.reload
