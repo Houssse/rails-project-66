@@ -26,6 +26,8 @@ Layout/LineLength:
   Max: 120
   AllowedPatterns:
     - '\s*# .+'
+Style/ClassAndModuleChildren:
+  Enabled: false
 Metrics/AbcSize:
   Enabled: false
 Metrics/MethodLength:

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Repository::Check < ApplicationRecord # rubocop:disable Style/ClassAndModuleChildren
+class Repository::Check < ApplicationRecord
   include AASM
 
   belongs_to :repository, class_name: 'Repository', inverse_of: :checks

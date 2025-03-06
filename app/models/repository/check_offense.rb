@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-class Repository::CheckOffense < ApplicationRecord # rubocop:disable Style/ClassAndModuleChildren
+class Repository::CheckOffense < ApplicationRecord
   belongs_to :check
 end

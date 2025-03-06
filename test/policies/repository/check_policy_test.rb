@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class Repository::CheckPolicyTest < ActiveSupport::TestCase # rubocop:disable Style/ClassAndModuleChildren
+class Repository::CheckPolicyTest < ActiveSupport::TestCase
   def setup
     @user = users(:one)
     @other_user = users(:two)
