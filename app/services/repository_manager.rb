@@ -18,9 +18,7 @@ class RepositoryManager
     @check.update!(commit_id: latest_commit_id)
   end
 
-  def repo_dir
-    @repo_dir
-  end
+  attr_reader :repo_dir
 
   private
 

@@ -5,9 +5,9 @@ class BashRunnerStub
     attr_accessor :custom_response, :command_filter
   end
 
-  DEFAULT_RESPONSE = ['', 0].freeze
+  DEFAULT_RESPONSE = ['{"files":[]}', 0].freeze
 
-  def self.stub_command(command_filter = nil, stdout: '', exit_status: 0)
+  def self.stub_command(command_filter = nil, stdout: '{"files":[]}', exit_status: 0)
     self.command_filter = command_filter
     self.custom_response = [stdout, exit_status]
   end

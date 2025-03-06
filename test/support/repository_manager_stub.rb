@@ -11,6 +11,6 @@ class RepositoryManagerStub
   end
 
   def repo_dir
-    Rails.root.join('tmp', 'test_repo_dir')
+    Rails.root.join('tmp/test_repo_dir')
   end
 end
