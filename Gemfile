@@ -76,6 +76,8 @@ group :development, :test do
   gem 'brakeman', require: false
 
   gem 'dotenv-rails'
+  gem 'pry'
+  gem 'rails-controller-testing'
 end
 
 group :development do

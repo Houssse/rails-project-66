@@ -9,6 +9,10 @@ class GithubRepositoryStub
 
   delegate :[], to: :params
 
+  def id
+    params[:id] || params['id']
+  end
+
   def full_name
     params[:full_name] || params['full_name']
   end
